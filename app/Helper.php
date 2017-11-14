@@ -4,11 +4,13 @@ use App\Entities\MpesaPaybill;
 use App\Entities\Offer;
 use App\Entities\SiteSetting;
 use App\User;
+use Carbon\Carbon;
 use GuzzleHttp\Psr7\Request as GuzzleRequest;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManagerStatic as Image;
 use Maatwebsite\Excel\Facades\Excel;
 use Propaganistas\LaravelPhone\PhoneNumber;
+use GeoIP as GeoIP;
 
 
 //get offers
@@ -427,7 +429,7 @@ function getUserAgent(){
 	return @$_SERVER["HTTP_USER_AGENT"]?$_SERVER["HTTP_USER_AGENT"]: "" ;
 }
 
-function getIp(){
+function getIp2(){
 	//Just get the headers if we can or else use the SERVER global
 	if ( function_exists( 'apache_request_headers' ) ) {
 		$headers = apache_request_headers();
@@ -451,8 +453,40 @@ function getHost() {
 	return @$_SERVER["REMOTE_HOST"]? $_SERVER["REMOTE_HOST"]: "" ; 
 }
 
+function getLocalDate($date) {
+	//return Carbon::parse($date)->timezone(getLocalTimezone());
+	$timezone = config('app.local_timezone');
+	//return Carbon::parse($date)->timezone($timezone)->format($format);
+	return Carbon::parse($date)->timezone($timezone);
+}
+
+function getCurrentDate() {
+	$date = Carbon::now();
+    return $date->toDateTimeString();
+}
+
 function getLocalTimezone() {
-	return config('app.local_timezone');
+	//get user timezone and return, 
+	//if blank return default timezone ('Africa/Nairobi')
+	//$location = getUserLocation();
+	//dd($location);
+	//$userTimezone=$location->timezone;
+	$userTimezone = '';
+	if ($userTimezone) {
+		$timezone = $userTimezone;
+	} else {
+		$timezone = config('app.local_timezone');
+	}
+	return $timezone;
+}
+
+function getIp(){
+	$ip = request()->ip();
+    return $ip;
+}
+
+function getUserLocation(){
+    return geoip(getIp());
 }
 
 function getJsonOauthData() {

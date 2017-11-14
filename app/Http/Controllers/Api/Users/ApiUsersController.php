@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Api\Users;
 
-use App\User;
 use App\Entities\ConfirmCode;
 use App\Http\Controllers\BaseController;
+use App\Role;
 use App\Transformers\Users\UserTransformer;
+use App\User;
 use Dingo\Api\Exception\StoreResourceFailedException;
 use Dingo\Api\Routing\Helpers;
 use Illuminate\Http\Request;
@@ -259,10 +260,17 @@ class ApiUsersController extends BaseController
         //create user
         $user = $this->model->create($request->all());
 
-        //attach roles if any
-        if ($request->has('roles')) {
-            $user->syncRoles($request['roles']);
-        }
+        //attach user role
+        $role = Role::where('name', 'user')->first();
+
+        //get date
+        $date = getCurrentDate();
+
+        //assign new user default role - user
+        $user->roles()->attach($role, [
+          'created_at' => $date,
+          'updated_at' => $date
+        ]);
 
         //return $this->response->created();
         return ['message' => 'User created. Please confirm your account.'];
