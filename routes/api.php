@@ -13,14 +13,14 @@ $api->version('v1', function($api){
 
         //sms routes
         $api->group(['prefix' => 'sms'],function ($api) {
-            $api->get('/registration', 'Api\Sms\SmsOutboxController@store');
-            $api->post('/registration', 'Api\Sms\SmsOutboxController@store');
+            $api->get('/registration', 'Api\Sms\ApiSmsOutboxController@store');
+            $api->post('/registration', 'Api\Sms\ApiSmsOutboxController@store');
         });
 
         //countries
         $api->group(['prefix' => 'countries'], function ($api) {
-            $api->get('/', 'Api\Countries\CountriesController@index');
-            $api->get('/{id}', 'Api\Countries\CountriesController@show');
+            $api->get('/', 'Api\Countries\ApiCountriesController@index');
+            $api->get('/{id}', 'Api\Countries\ApiCountriesController@show');
         });
 
         //states
