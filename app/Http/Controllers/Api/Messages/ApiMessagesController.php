@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Api\Messages;
 
 use App\Entities\Message;
-use App\Entities\User;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
 use App\Http\Controllers\Controller;
 use App\Transformers\Messages\MessageTransformer;
 use Dingo\Api\Exception\StoreResourceFailedException;
@@ -18,7 +17,7 @@ use Jenssegers\Agent\Agent;
 use Propaganistas\LaravelPhone\PhoneNumber;
 use libphonenumber\PhoneNumberFormat;
 
-class MessagesController extends Controller
+class ApiMessagesController extends Controller
 {
 
     use Helpers;

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Entities\Company;
 use App\Entities\Group;
 use App\Entities\UssdRegistration;
-use App\Entities\User;
+use App\User;
 use Excel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;

@@ -2,7 +2,7 @@
 
 namespace App\Transformers\Users;
 
-use App\Entities\Permission;
+use App\Permission;
 use League\Fractal\TransformerAbstract;
 
 /**

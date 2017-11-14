@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\Users;
 
-use App\Entities\Role;
+use App\Role;
 use Illuminate\Http\Request;
 use Dingo\Api\Routing\Helpers;
 use App\Http\Controllers\Controller;

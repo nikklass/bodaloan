@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Company;
-use App\Entities\User;
+use App\User;
 use App\Entities\MpesaPaybill;
 use Illuminate\Http\Request;
 use Session;

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Messages;
 
 use App\Entities\Message;
-use App\Entities\User;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 

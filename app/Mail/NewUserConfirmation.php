@@ -7,7 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-use App\Entities\User;
+use App\User;
 
 class NewUserConfirmation extends Mailable
 {

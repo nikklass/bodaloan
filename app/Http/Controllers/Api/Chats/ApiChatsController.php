@@ -11,9 +11,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 /**
- * Class ChatsController.
+ * Class ApiChatsController.
  */
-class ChatsController extends Controller
+class ApiChatsController extends Controller
 {
     use Helpers;
 

@@ -6,7 +6,7 @@ use App\Entities\Company;
 use App\Entities\Group;
 use App\Entities\SmsOutbox;
 use App\Entities\ScheduleSmsOutbox;
-use App\Entities\User;
+use App\User;
 use Session;
 
 use Illuminate\Http\Request;

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Entities\Role;
-use App\Entities\Permission;
+use App\Role;
+use App\Permission;
 use Session;
 
 class RoleController extends Controller

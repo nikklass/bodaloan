@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers\Api\Users;
 
-use App\Entities\Role;
-use Illuminate\Http\Request;
-use Dingo\Api\Routing\Helpers;
-use App\Http\Controllers\Controller;
+use App\Role;
+use App\Http\Controllers\BaseController;
 use App\Transformers\Users\RoleTransformer;
+use Dingo\Api\Routing\Helpers;
+use Illuminate\Http\Request;
 
 /**
- * Class RolesController
+ * Class ApiRolesController
  * @package App\Http\Controllers\Api\Users
  */
-class RolesController extends Controller
+class ApiRolesController extends BaseController
 {
-    use Helpers;
 
     /**
      * @var

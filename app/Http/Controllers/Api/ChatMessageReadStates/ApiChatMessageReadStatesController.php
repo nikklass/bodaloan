@@ -1,33 +1,33 @@
 <?php
 
-namespace App\Http\Controllers\Api\ChatThreads;
+namespace App\Http\Controllers\Api\ChatMessageReadStates;
 
-use App\Entities\ChatThread;
-use App\Http\Controllers\Controller;
-use App\Transformers\ChatThreads\ChatThreadTransformer;
+use App\Entities\ChatMessageReadState;
+use App\Http\Controllers\BaseController;
+use App\Transformers\ChatMessageReadStates\ChatMessageReadStateTransformer;
 use Dingo\Api\Exception\StoreResourceFailedException;
 use Dingo\Api\Routing\Helpers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 /**
- * Class ChatThreadsController.
+ * Class ApiChatMessageReadStatesController.
  */
-class ChatThreadsController extends Controller
+class ApiChatMessageReadStatesController extends BaseController
 {
-    use Helpers;
 
     /**
-     * @var ChatThread
+     * @var ChatMessageReadState
      */
     protected $model;
+
 
     /**
      * ChatsController constructor.
      *
-     * @param ChatThread $model
+     * @param ChatMessageReadState $model
      */
-    public function __construct(ChatThread $model)
+    public function __construct(ChatMessageReadState $model)
     {
         $this->model = $model;
         /*$this->middleware('permission:List chatchannels')->only('index');
@@ -39,14 +39,14 @@ class ChatThreadsController extends Controller
 
 
     /**
-     * Returns the ChatThreads resource.
+     * Returns the ChatMessageReadStates resource with the roles relation.
      *
      * @param Request $request
      * @return mixed
      */
     public function index(Request $request)
     {
-        
+
         /*start cache settings*/
         $url = request()->url();
         $params = request()->query();
@@ -54,28 +54,23 @@ class ChatThreadsController extends Controller
         $fullUrl = getFullCacheUrl($url, $params);
         $minutes = getCacheDuration(); 
         /*end cache settings*/
-
-
-        $status_id = $request->status_id;
         
-        if (!$status_id) { $status_id = 1; }
+        $chat_message_read_states = $this->model;
 
-        $chat_threads = $this->model;
-
-        if ($request->chat_channel_id) {
-            $chat_threads = $chat_threads->where('chat_channel_id', $request->chat_channel_id);
+        if ($request->chat_thread_id) {
+            $chat_message_read_states = $chat_message_read_states->where('chat_message_id', $request->chat_thread_id);
         }
 
-        $paginator = $chat_threads->where('status_id', $status_id)
-                     ->orderBy('id', 'desc')
+        $paginator = $chat_message_read_states->orderBy('id', 'desc')
                      ->paginate($request->get('limit', config('app.pagination_limit')));
 
-        $data = $this->response->paginator($paginator, new ChatThreadTransformer());
+        $data = $this->response->paginator($paginator, new ChatMessageReadStateTransformer());
 
         //return cached data or cache if cached data not exists
         return cache()->remember($fullUrl, $minutes, function () use ($data) {
             return $data;
         });
+
 
     }
 
@@ -86,7 +81,7 @@ class ChatThreadsController extends Controller
      */
     public function show($id)
     {
-        
+
         /*start cache settings*/
         $url = request()->url();
         $params = request()->query();
@@ -95,9 +90,9 @@ class ChatThreadsController extends Controller
         $minutes = getCacheDuration(); 
         /*end cache settings*/
 
-        $chat_thread = $this->model->findOrFail($id);
+        $chat_message_read_state = $this->model->findOrFail($id);
 
-        $data = $this->response->item($chat_thread, new ChatThreadTransformer());
+        $data = $this->response->item($chat_message_read_state, new ChatMessageReadStateTransformer());
 
         //return cached data or cache if cached data not exists
         return cache()->remember($fullUrl, $minutes, function () use ($data) {
@@ -118,16 +113,14 @@ class ChatThreadsController extends Controller
         $user_id = auth()->user()->id;
 
         request()->merge(array(
-                    'user_id' => $user_id,
-                    'updated_by' => $user_id
+                    'user_id' => $user_id
                 ));
 
         $rules = [
-            'title' => 'required|unique:chat_threads',
-            'chat_channel_id' => 'required'
+            'chat_thread_id' => 'required'
         ];
 
-        $payload = app('request')->only('title', 'chat_channel_id');
+        $payload = app('request')->only('chat_thread_id');
 
         $validator = app('validator')->make($payload, $rules);
 
@@ -136,10 +129,10 @@ class ChatThreadsController extends Controller
             throw new StoreResourceFailedException($error_messages);
         }
 
-        //create channel
-        $chat_channel = $this->model->create($request->all());
+        //create item
+        $chat_message_read_state = $this->model->create($request->all());
 
-        return ['message' => 'Chat Thread created'];
+        return ['message' => 'Chat Message Read States created'];
 
     }
 
@@ -154,17 +147,15 @@ class ChatThreadsController extends Controller
         
         $chat_channel = $this->model->findOrFail($id);
         $rules = [
-            'title' => 'required',
-            'chat_channel_id' => 'required'
+            'name' => 'required',
         ];
         if ($request->method() == 'PATCH') {
             $rules = [
-                'title' => 'sometimes|required',
-                'chat_channel_id' => 'sometimes|required',
+                'name' => 'sometimes|required',
             ];
         }
 
-        $payload = app('request')->only('title', 'chat_channel_id');
+        $payload = app('request')->only('name');
 
         $validator = app('validator')->make($payload, $rules);
 
@@ -173,9 +164,9 @@ class ChatThreadsController extends Controller
             throw new StoreResourceFailedException($error_messages);
         }
 
-        $chat_channel->update($request->only('title', 'chat_channel_id'));
+        $chat_channel->update($request->only('name', 'updated_by'));
 
-        return $this->response->item($chat_channel->fresh(), new ChatThreadTransformer());
+        return $this->response->item($chat_channel->fresh(), new ChatMessageReadStateTransformer());
 
     }
 
@@ -187,11 +178,9 @@ class ChatThreadsController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $chat_thread = $this->model->findOrFail($id);
-        $chat_thread->delete();
+        $chat_channel = $this->model->findOrFail($id);
+        $chat_channel->delete();
 
         return $this->response->noContent();
     }
-
-
 }

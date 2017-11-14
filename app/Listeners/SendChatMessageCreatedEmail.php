@@ -6,7 +6,7 @@ use App\Entities\ChatMessage;
 use App\Entities\ChatMessageCreatedEmailTempJob;
 use App\Entities\ChatMessageEmail;
 use App\Entities\ChatThread;
-use App\Entities\User;
+use App\User;
 use App\Events\ChatMessageCreated;
 use App\Jobs\SendChatMessageCreatedEmailJob;
 use Illuminate\Contracts\Queue\ShouldQueue;

@@ -2,22 +2,20 @@
 
 namespace App\Http\Controllers\Api\Users;
 
-use Illuminate\Http\Request;
-use Dingo\Api\Routing\Helpers;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Controller;
-use Illuminate\Contracts\Hashing\Hasher;
-use Dingo\Api\Exception\ResourceException;
+use App\Http\Controllers\BaseController;
 use App\Transformers\Users\UserTransformer;
+use Dingo\Api\Exception\ResourceException;
+use Dingo\Api\Routing\Helpers;
+use Illuminate\Contracts\Hashing\Hasher;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /**
- * Class ProfileController
+ * Class ApiProfileController
  * @package App\Http\Controllers\Api\Users
  */
-class ProfileController extends Controller
+class ApiProfileController extends BaseController
 {
-
-    use Helpers;
 
     /**
      * @return \Dingo\Api\Http\Response

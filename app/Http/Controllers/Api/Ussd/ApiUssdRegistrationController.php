@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api\Ussd;
 
-use App\Company;
-use App\Group;
+use App\Entities\Company;
+use App\Entities\Group;
+use App\User;
+use App\Entities\UssdRegistration;
 use App\Http\Controllers\BaseController;
 use App\Transformers\Ussd\UssdRegistrationTransformer;
-use App\User;
-use App\UssdRegistration;
 use Carbon\Carbon;
 use Dingo\Api\Exception\StoreResourceFailedException;
 use Dingo\Api\Routing\Helpers;

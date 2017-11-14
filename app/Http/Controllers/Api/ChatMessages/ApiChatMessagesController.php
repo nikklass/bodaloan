@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\ChatMessages;
 
 use App\Entities\ChatMessage;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Transformers\ChatMessages\ChatMessageTransformer;
 use Dingo\Api\Exception\StoreResourceFailedException;
 use Dingo\Api\Routing\Helpers;
@@ -11,11 +11,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 /**
- * Class ChatMessagesController.
+ * Class ApiChatMessagesController.
  */
-class ChatMessagesController extends Controller
+class ApiChatMessagesController extends BaseController
 {
-    use Helpers;
 
     /**
      * @var ChatMessage

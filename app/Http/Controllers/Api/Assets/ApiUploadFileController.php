@@ -2,24 +2,23 @@
 
 namespace App\Http\Controllers\Api\Assets;
 
-use GuzzleHttp\Client;
-use Illuminate\Http\Request;
 use App\Entities\Assets\Asset;
-use Dingo\Api\Routing\Helpers;
 use App\Events\AssetWasCreated;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
 use App\Exceptions\BodyTooLargeException;
-use GuzzleHttp\Exception\TransferException;
+use App\Http\Controllers\BaseController;
 use App\Transformers\Assets\AssetTransformer;
 use Dingo\Api\Exception\StoreResourceFailedException;
+use Dingo\Api\Routing\Helpers;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\TransferException;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 /**
- * Class UploadFileController.
+ * Class ApiUploadFileController.
  */
-class UploadFileController extends Controller
+class ApiUploadFileController extends BaseController
 {
-    use Helpers;
 
     /**
      * @var array

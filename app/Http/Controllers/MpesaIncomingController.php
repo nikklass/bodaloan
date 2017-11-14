@@ -6,7 +6,7 @@ use App\Entities\Company;
 use App\Entities\Group;
 use App\Entities\MpesaIncoming;
 use App\Entities\MpesaPaybill;
-use App\Entities\User;
+use App\User;
 use Carbon\Carbon;
 use Excel;
 use GuzzleHttp\Psr7\Request as GuzzleRequest;

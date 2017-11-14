@@ -1,17 +1,12 @@
 <?php 
 
-namespace App\Entities;
+namespace App;
 
 use Carbon\Carbon;
-use Laratrust\LaratrustPermission;
+use Laratrust\LaratrustRole;
 
-class Permission extends LaratrustPermission
+class Role extends LaratrustRole
 {
-	protected $fillable = [
-	   'name', 'display_name', 'description',
-	];
-
-
 	//start convert dates to local dates
     public function getCreatedAtAttribute($value)
     {

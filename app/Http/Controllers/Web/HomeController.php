@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Web;
 
 use App\Entities\Offer;
-use App\Entities\Role;
-use App\Entities\User;
+use App\Role;
+use App\User;
 use App\Http\Controllers\Controller;
 use Hash;
 use Illuminate\Http\Request;

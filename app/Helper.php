@@ -3,7 +3,7 @@
 use App\Entities\MpesaPaybill;
 use App\Entities\Offer;
 use App\Entities\SiteSetting;
-use App\Entities\User;
+use App\User;
 use GuzzleHttp\Psr7\Request as GuzzleRequest;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManagerStatic as Image;

@@ -17,10 +17,10 @@ use Propaganistas\LaravelPhone\PhoneNumber;
 use libphonenumber\PhoneNumberFormat;
 
 /**
- * Class CountriesController.
+ * Class ApiCountriesController.
  *
  */
-class CountriesController extends Controller
+class ApiCountriesController extends Controller
 {
     use Helpers;
 

@@ -4,10 +4,10 @@ use App\Entities\Company;
 use App\Entities\Group;
 use App\Entities\MpesaIncoming;
 use App\Entities\MpesaPaybill;
-use App\Entities\Permission;
-use App\Entities\Role;
+use App\Permission;
+use App\Role;
 use App\Entities\SmsOutbox;
-use App\Entities\User;
+use App\User;
 
 // Home
 Breadcrumbs::register('home', function($breadcrumbs)

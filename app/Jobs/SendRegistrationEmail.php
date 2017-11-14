@@ -11,7 +11,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use App\Mail\NewUserConfirmation;
 use Mail;
 
-use App\Entities\User;
+use App\User;
 
 class SendRegistrationEmail implements ShouldQueue
 {

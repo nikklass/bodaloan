@@ -2,7 +2,7 @@
 
 namespace App\Validators;
 
-use App\Entities\User;
+use App\User;
 use Illuminate\Validation\Validator;
 use Propaganistas\LaravelPhone\PhoneNumber;
 

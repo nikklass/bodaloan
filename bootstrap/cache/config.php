@@ -6,7 +6,7 @@
     'version' => 'v1',
     'prefix' => 'api',
     'domain' => NULL,
-    'name' => 'Barddy API',
+    'name' => 'Boda Loan API',
     'conditionalRequest' => false,
     'strict' => false,
     'debug' => false,
@@ -36,7 +36,7 @@
   ),
   'app' => 
   array (
-    'name' => 'Barddy Drinks',
+    'name' => 'Boda Loan',
     'env' => 'local',
     'debug' => true,
     'url' => 'http://127.0.0.1/',
@@ -50,7 +50,7 @@
     'log_level' => 'debug',
     'pagination_limit' => 20,
     'password_client_id' => '2',
-    'password_client_secret' => 'Nzxp6uVE7Fi3jclkQTbmA9A7TVbeqABG8mpiP5Vt',
+    'password_client_secret' => 'Cps7n1BznvRHUZIthbU7GHpNazxRHNIoLFgyU48k',
     'cache_minutes' => '5',
     'cache_minutes_low' => '60',
     'providers' => 
@@ -260,44 +260,59 @@
   ),
   'constants' => 
   array (
-    'error' => 
+    'site' => 
     array (
-      'invalid_phone_number' => 'Please enter a valid phone number in any of these formats: <br>7XXXXXXXX,  <br>07XXXXXXXX, <br>2547XXXXXXXX, <br>+2547XXXXXXXX',
+      'url' => 'http://localhost:8000/',
+      'cache_minutes' => 5,
+      'cache_minutes_low' => 60,
     ),
-    'routes' => 
+    'email' => 
     array (
-      'get_users_url' => 'http://127.0.0.1:8000/api/v1/users/index',
-      'create_user_url' => 'http://127.0.0.1:8000/api/v1/users/create',
-      'create_message_url' => 'http://127.0.0.1:8000/api/v1/smsoutbox/create',
+      'from_address' => NULL,
+      'from_name' => NULL,
     ),
     'passport' => 
     array (
       'client_id' => NULL,
       'client_secret' => NULL,
-      'login_url' => 'http://127.0.0.1:8000/oauth/token',
-      'user_url' => 'http://127.0.0.1:8000/api/user',
+      'token_url' => 'http://41.215.126.10/api2/oauth/token',
+      'local_token_url' => 'http://localhost:8000/oauth/token',
+    ),
+    'bulk_sms' => 
+    array (
+      'send_sms_url' => 'http://41.215.126.10/api2/api/sms/sendsms',
+      'get_sms_data_url' => 'http://41.215.126.10/api2/api/sms/getaccount',
+      'src' => NULL,
+      'usr' => NULL,
+      'pass' => NULL,
     ),
     'oauth' => 
     array (
-      'token_url' => 'http://mschools.co.ke/api2/oauth/token',
       'username' => NULL,
       'password' => NULL,
       'client_id' => NULL,
       'client_secret' => NULL,
     ),
-    'bulk_sms' => 
+    'sms_types' => 
     array (
-      'send_sms_url' => 'http://mschools.co.ke/api2/api/sms/sendsms',
-      'get_sms_data_url' => 'http://mschools.co.ke/api2/api/sms/getaccount',
-      'get_sms_inbox_url' => 'http://mschools.co.ke/api/v1/get_sms_inbox',
-      'get_sms_inbox' => 'http://mschools.co.ke/api/v1/get_sms_inbox',
-      'src' => NULL,
-      'usr' => NULL,
-      'pass' => NULL,
+      'registration_sms' => '1',
+      'recommendation_sms' => '2',
+      'resent_registration_sms' => '3',
+      'forgot_password_sms' => '4',
+      'confirm_number_sms' => '5',
+      'company_sms' => '6',
     ),
-    'mpesa' => 
+    'status' => 
     array (
-      'getpayments_url' => 'http://mschools.co.ke/api2/api/mpesa/getpayments',
+      'active' => '1',
+      'disabled' => '2',
+      'suspended' => '3',
+      'expired' => '4',
+      'pending' => '5',
+      'confirmed' => '6',
+      'cancelled' => '7',
+      'sent' => '8',
+      'inactive' => '99',
     ),
   ),
   'database' => 
@@ -716,7 +731,7 @@
   'laratrust' => 
   array (
     'use_morph_map' => false,
-    'use_teams' => false,
+    'use_teams' => true,
     'user_models' => 
     array (
       'users' => 'App\\User',
@@ -893,7 +908,7 @@
     ),
     'stripe' => 
     array (
-      'model' => 'App\\User',
+      'model' => 'App\\Entities\\User',
       'key' => NULL,
       'secret' => NULL,
     ),

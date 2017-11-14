@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Api\Cities;
+namespace App\Http\Controllers\Api\States;
 
-use App\Entities\City;
-use App\Http\Controllers\Controller;
-use App\Transformers\Cities\CityTransformer;
+use App\Entities\Country;
+use App\Entities\State;
+use App\Http\Controllers\BaseController;
+use App\Transformers\States\StateTransformer;
 use Carbon\Carbon;
 use Dingo\Api\Exception\StoreResourceFailedException;
 use Dingo\Api\Http\Response\paginator;
@@ -14,24 +15,23 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 /**
- * Class CitiesController.
+ * Class ApiStatesController.
  *
  */
-class CitiesController extends Controller
+class ApiStatesController extends BaseController
 {
-    use Helpers;
 
     /**
-     * @var City
+     * @var state
      */
     protected $model;
 
     /**
-     * CitiesController constructor.
+     * StatesController constructor.
      *
-     * @param City $model
+     * @param State $model
      */
-    public function __construct(City $model)
+    public function __construct(State $model)
     {
         $this->model = $model;
 
@@ -45,26 +45,28 @@ class CitiesController extends Controller
 
         //are we in report mode?
         $report = $request->report;
-        $state_id = $request->state_id;
+        $country_code = $request->country;
 
-        $cities = new City();
+        $states = new State();
 
-        if ($state_id) {
-            //get state cities
-            $cities = $cities->where('state_id', $state_id);
+        if ($country_code) {
+            //get country id from code/ sortname
+            $country = Country::where('sortname', $country_code)->first();
+            //get country states
+            $states = $states->where('country_id', $country->id);
         }
 
-        $cities = $cities->orderBy('name', 'asc');
+        $states = $states->orderBy('name', 'asc');
         
         if (!$report) {
-            $cities = $cities->paginate('limit', $request->get('limit', config('app.pagination_limit')));
+            $states = $states->paginate('limit', $request->get('limit', config('app.pagination_limit')));
 
-            return $this->response->paginator($cities, new CityTransformer());
+            return $this->response->paginator($states, new StateTransformer());
         }
 
-        $cities = $cities->get();
+        $states = $states->get();
 
-        return $this->response->collection($cities, new CityTransformer);
+        return $this->response->collection($states, new StateTransformer);
 
     }
 
@@ -76,7 +78,7 @@ class CitiesController extends Controller
     {
         $state = $this->model->findOrFail($id);
 
-        return $this->response->item($state, new CityTransformer());
+        return $this->response->item($state, new StateTransformer());
     }
 
     /**

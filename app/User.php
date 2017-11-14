@@ -1,24 +1,25 @@
 <?php
 
-namespace App\Entities;
+namespace App;
 
 use App\Entities\Company;
 use App\Entities\Image;
 use App\Entities\MpesaPaybill;
 use App\Entities\Sacco;
 use App\Entities\SmsOutbox;
+use App\Events\UserCreated;
+use App\Events\UserUpdated;
+use App\Support\UuidScopeTrait;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laratrust\Traits\LaratrustUserTrait;
-use Laravel\Passport\HasApiTokens;
-
 use Dingo\Api\Exception\StoreResourceFailedException;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Validator;
 use Jenssegers\Agent\Agent;
+use Laratrust\Traits\LaratrustUserTrait;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -182,7 +183,7 @@ class User extends Authenticatable
         return $this->where('active', '1')
                     ->where(function ($query) use ($username) {
                         $query->where('email', $username)
-                              ->orWhere('phone_number', $username);
+                              ->orWhere('phone', $username);
                     })->first();
 
     }

@@ -18,10 +18,10 @@ use Propaganistas\LaravelPhone\PhoneNumber;
 use libphonenumber\PhoneNumberFormat;
 
 /**
- * Class OffersController.
+ * Class ApiOffersController.
  *
 */
-class OffersController extends Controller
+class ApiOffersController extends Controller
 {
     
     use Helpers;

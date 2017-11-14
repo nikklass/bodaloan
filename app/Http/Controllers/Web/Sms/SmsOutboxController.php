@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Sms;
 
 use App\Entities\SmsOutbox;
-use App\Entities\User;
+use App\User;
 use Carbon\Carbon;
 use Excel;
 use GuzzleHttp\Psr7\Request as GuzzleRequest;

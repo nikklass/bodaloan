@@ -19,10 +19,10 @@ use libphonenumber\PhoneNumberFormat;
 
 
 /**
- * Class ClubsController.
+ * Class ApiClubsController.
  *
  */
-class ClubsController extends Controller
+class ApiClubsController extends Controller
 {
     use Helpers;
 

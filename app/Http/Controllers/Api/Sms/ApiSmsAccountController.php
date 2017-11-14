@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\paginate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class SmsAccountController extends BaseController
+class ApiSmsAccountController extends BaseController
 {
  
     //Display sms account details listing 

@@ -2,26 +2,23 @@
 
 namespace App\Http\Controllers\Api\Users;
 
-use App\Entities\Permission;
-use Illuminate\Http\Request;
-use Dingo\Api\Routing\Helpers;
-use App\Http\Controllers\Controller;
+use App\Permission;
+use App\Http\Controllers\BaseController;
 use App\Transformers\Users\PermissionTransformer;
+use Dingo\Api\Routing\Helpers;
+use Illuminate\Http\Request;
 
 /**
- * Class PermissionsController
+ * Class ApiPermissionsController
  * @package App\Http\Controllers\Api\Users
  */
-class PermissionsController extends Controller
+class ApiPermissionsController extends BaseController
 {
-
-    use Helpers;
 
     /**
      * @var
      */
     protected $model;
-
 
     /**
      * PermissionsController constructor.

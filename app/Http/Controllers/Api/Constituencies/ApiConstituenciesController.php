@@ -14,10 +14,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 /**
- * Class ConstituenciesController.
+ * Class ApiConstituenciesController.
  *
  */
-class ConstituenciesController extends Controller
+class ApiConstituenciesController extends Controller
 {
     use Helpers;
 

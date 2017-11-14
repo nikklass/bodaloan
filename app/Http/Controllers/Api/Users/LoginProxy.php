@@ -48,7 +48,7 @@ class LoginProxy
     {
 
         $user = $this->model->where('email', $username)
-                ->orWhere('phone_number', $username)
+                ->orWhere('phone', $username)
                 ->first();
 
         //dd($user, $username, $password);
@@ -103,6 +103,8 @@ class LoginProxy
         //dd($data);
 
         $response = $this->apiConsumer->post('/oauth/token', $data);
+
+        //dd($response);
 
         if (!$response->isSuccessful()) {
             throw new StoreResourceFailedException("Wrong login credentials");

@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\paginate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class MpesaIncomingController extends BaseController
+class ApiMpesaIncomingController extends BaseController
 {
 
     //get mpesa incoming payments 

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Entities\Company;
 use App\Services\User\UserImport;
 use App\Entities\TempTable;
-use App\Entities\User;
+use App\User;
 use DB;
 use Excel;
 use Illuminate\Http\Request;

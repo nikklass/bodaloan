@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Users;
 
 use App\Entities\ConfirmCode;
-use App\Entities\User;
+use App\User;
 use App\Http\Controllers\Controller;
 use App\Transformers\Users\UserTransformer;
 use Dingo\Api\Exception\StoreResourceFailedException;

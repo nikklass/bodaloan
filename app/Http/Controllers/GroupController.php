@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Entities\Group;
-use App\Entities\User;
+use App\User;
 use App\Entities\Company;
 use Session;
 

@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-use App\Entities\User;
+use App\User;
 use DateTime;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Events\Dispatcher;

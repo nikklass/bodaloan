@@ -1,49 +1,67 @@
 <?php
 
-$api_domain_url = "http://127.0.0.1:8000/";
-$api_version_url = "api/v1/";
-$api_path_url = $api_domain_url . $api_version_url;
+//$api_domain_url = env('APP_URL');
+$api_domain_url = 'http://localhost:8000/';
+$api_path_url = $api_domain_url;
 
-$remote_api_url = "http://mschools.co.ke/api/v1/";
-
-$remote_api_base_url = "http://mschools.co.ke/api2/";
-//$remote_api_base_url = "http://localhost:6000/";
-
-$remote_api_url2 = $remote_api_base_url . "v1/";
+//$remote_base_url = "http://mschools.co.ke/api2/";
+$remote_base_url = "http://41.215.126.10/api2/";
+$remote_api_url = $remote_base_url . "api/";
 
 return [
     
-    'error' => [
-        'invalid_phone_number' => 'Please enter a valid phone number in any of these formats: <br>7XXXXXXXX,  <br>07XXXXXXXX, <br>2547XXXXXXXX, <br>+2547XXXXXXXX'
+    'site' => [
+        'url' => $api_domain_url,
+        'cache_minutes' => 5,
+        'cache_minutes_low' => 60,
     ],
-    'routes' => [
-        'get_users_url' => $api_path_url . 'users/index',
-        'create_user_url' => $api_path_url . 'users/create',
-        'create_message_url' => $api_path_url . 'smsoutbox/create'
+
+    'email' => [
+        'from_address' => env('MAIL_FROM_ADDRESS'),
+        'from_name' => env('MAIL_FROM_NAME'),
     ],
+
     'passport' => [
         'client_id' => env('PASSPORT_CLIENT_ID'),
         'client_secret' => env('PASSPORT_CLIENT_SECRET'),
-        'login_url' => $api_domain_url . 'oauth/token',
-        'user_url' => $api_domain_url . 'api/user'
+        'token_url' => $remote_base_url . "oauth/token",
+        'local_token_url' => $api_domain_url . "oauth/token",
     ],
-    'oauth' => [
-        'token_url' => $remote_api_base_url . "oauth/token",
-        'username' => env('OAUTH_USERNAME'),
-        'password' => env('OAUTH_PASSWORD'),
-        'client_id' => env('OAUTH_CLIENT_ID'),
-        'client_secret' => env('OAUTH_CLIENT_SECRET')
-    ],
+
     'bulk_sms' => [ 
-        'send_sms_url' => $remote_api_base_url . "api/sms/sendsms",
-        'get_sms_data_url' => $remote_api_base_url . "api/sms/getaccount",
-        'get_sms_inbox_url' => $remote_api_url . "get_sms_inbox",
-        'get_sms_inbox' => $remote_api_url . "get_sms_inbox",
+        'send_sms_url' => $remote_api_url . "sms/sendsms",
+        'get_sms_data_url' => $remote_api_url . "sms/getaccount",
         'src' => env('BULK_SMS_SRC'),
         'usr' => env('BULK_SMS_USR'),
         'pass' => env('BULK_SMS_PASS'),
     ],
-    'mpesa' => [
-        'getpayments_url' => $remote_api_base_url . 'api/mpesa/getpayments',
+
+    'oauth' => [
+        'username' => env('OAUTH_USERNAME'),
+        'password' => env('OAUTH_PASSWORD'),
+        'client_id' => env('OAUTH_CLIENT_ID'),
+        'client_secret' => env('OAUTH_CLIENT_SECRET'),
+    ],
+
+    'sms_types' => [ 
+        'registration_sms' => "1",
+        'recommendation_sms' => "2",
+        'resent_registration_sms' => "3",
+        'forgot_password_sms' => "4",
+        'confirm_number_sms' => "5",
+        'company_sms' => "6",
+    ],
+
+    'status' => [ 
+        'active' => "1",
+        'disabled' => "2",
+        'suspended' => "3",
+        'expired' => "4",
+        'pending' => "5",
+        'confirmed' => "6",
+        'cancelled' => "7",
+        'sent' => "8",
+        'inactive' => "99",
     ]
+
 ];
